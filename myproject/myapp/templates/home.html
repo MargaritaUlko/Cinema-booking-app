@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,23 +36,22 @@
 
 
 <div class="container">
-    {% if movies %}
-        <h1>Фильмы</h1>
-        <ul>
-            {% for movie in movies %}
-                <li>
-                    <h2>{{ movie.title }}</h2> <!-- Название фильма -->
-                    {% if movie.poster %}
-                        <img src="{% static movie.poster %}" alt="{{ movie.title }} Poster"> <!-- Изображение фильма -->
-                    {% endif %}
+    <h1>Фильмы</h1>
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="movie-item">
+            <h2>{{ movie.title }}</h2>
+            {% if movie.poster %}
+            <img src="{% static movie.poster %}" alt="{{ movie.title }} Poster">
+            {% endif %}
+            <a href="{% url 'movie_details' movie.id %}" class="btn">Подробнее</a>
 
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Нет доступных фильмов.</p>
-    {% endif %}
+
+        </div>
+        {% endfor %}
+    </div>
 </div>
+
 
 
 <footer>

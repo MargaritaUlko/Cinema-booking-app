@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ movie.title }}</title>
+    {% load static %} <!-- Добавьте эту строку -->
+    <style>
+        .movie-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .movie-details .info {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .movie-details .info h2 {
+            margin-bottom: 10px;
+        }
+        .movie-details .info p {
+            margin-bottom: 20px;
+        }
+        .movie-details .image {
+            flex: 1;
+        }
+        .movie-details .image img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="movie-details">
+        <div class="info">
+            <h2>{{ movie.title }}</h2>
+            <p>{{ movie.description }}</p>
+    </div>
+    <div class="image">
+        <img src="{% static movie.poster %}" alt="{{ movie.title }} Poster">
+    </div>
+
+</body>
+</html>
+

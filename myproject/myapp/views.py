@@ -8,7 +8,8 @@ from .forms import MovieForm
 from .forms import LoginForm
 from .models import User
 from .models import Movie1
-
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
 def add_movie(request):
     if request.user.role != 'admin':
         return redirect('home')  # Предположим, что у вас есть представление 'home'
@@ -23,10 +24,17 @@ def add_movie(request):
         form = MovieForm()
     return render(request, 'add_movie.html', {'form': form})
 
-
+def load_movies(request):
+    movies = Movie1.objects.all()
+    data = [{'title': movie.title, 'poster': movie.poster.url} for movie in movies]
+    return JsonResponse(data, safe=False)
 def movie_list(request):
     movies = Movie1.objects.all()
     return render(request, 'home.html', {'movies': movies})
+
+def movie_details(request, movie_id):
+    movie = get_object_or_404(Movie1, id=movie_id)
+    return render(request, 'movie_details.html', {'movie': movie})
 
 def my_view(request):
     if request.user.is_authenticated:

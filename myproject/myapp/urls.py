@@ -15,6 +15,7 @@ urlpatterns = [
     path('login/', views.authorization3, name='login'),
     path('add_movie/', views.add_movie, name='add_movie'),
     path('logout/', views.user_logout, name='logout'),
+    path('movies/<int:movie_id>/', views.movie_details, name='movie_details'),
     # URL для выхода из системы
     # Страница авторизации
     # Другие URL-маршруты вашего приложения

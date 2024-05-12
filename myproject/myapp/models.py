@@ -24,7 +24,18 @@ class Movie1(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     poster = models.ImageField(upload_to='movie_posters', null=True, blank=True)
-    is_active = models.BooleanField(default=False)
+    year = models.IntegerField(null=True, blank=True)
+    country = models.CharField(max_length=100, null=True, blank=True)
+    genre = models.CharField(max_length=100, null=True, blank=True)
+    director = models.CharField(max_length=100, null=True, blank=True)
+    screenplay = models.CharField(max_length=100, null=True, blank=True)
+    producer = models.CharField(max_length=100, null=True, blank=True)
+    cinematography = models.CharField(max_length=100, null=True, blank=True)
+    composer = models.CharField(max_length=100, null=True, blank=True)
+    production_designer = models.CharField(max_length=100, null=True, blank=True)
+    editor = models.CharField(max_length=100, null=True, blank=True)
+    budget = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+
 
 class Session(models.Model):
     movie = models.ForeignKey(Movie1, on_delete=models.CASCADE, null=True, blank=True)
