@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U-Cinema</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+<header>
+    <!-- Иконка личного кабинета -->
+    <img src="{% static 'download.png' %}" alt="Profile" class="profile-icon">
+    {% if user.is_authenticated %}
+        <p>Привет, {{ user.email }}</p> <!-- Вывод почты авторизованного пользователя -->
+        <a href="{% url 'logout' %}">Выйти</a>  <!-- Кнопка выхода -->
+        <!-- Здесь можно добавить другие элементы, доступные только для авторизованных пользователей -->
+    {% else %}
+        <a href="{% url 'login' %}">Войти</a>
+        <!-- Здесь можно добавить другие элементы, доступные только для неавторизованных пользователей -->
+    {% endif %}
+</header>
+
+
+<div class="container">
+    {% if user.is_authenticated %}
+        <h1>!!!!</h1>  <!-- Показывать только для авторизованных пользователей -->
+    {% else %}
+        <h1>Welcome to U-Cinema</h1>
+        <p>Discover the latest movies and book your tickets now!</p>
+        <a href="/movies/" class="button">Explore Movies</a>
+    {% endif %}
+</div>
+
+
+<div class="container">
+    {% if movies %}
+        <h1>Фильмы</h1>
+        <ul>
+            {% for movie in movies %}
+                <li>
+                    <h2>{{ movie.title }}</h2> <!-- Название фильма -->
+                    {% if movie.poster %}
+                        <img src="{% static movie.poster %}" alt="{{ movie.title }} Poster"> <!-- Изображение фильма -->
+                    {% endif %}
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Нет доступных фильмов.</p>
+    {% endif %}
+</div>
+
+
+<footer>
+    &copy; 2024 U-Cinema. All rights reserved.
+</footer>
+
+</body>
+</html>
